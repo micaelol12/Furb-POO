@@ -1,0 +1,5 @@
+import java.time.LocalDate;
+
+public class Apresentacao {
+	Aluno c = new Aluno("micael",  LocalDate.parse("2002-01-05"));
+}

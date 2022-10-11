@@ -1,0 +1,16 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Apresentacao {
+	
+	private ArrayList<Aluno>alunos = new ArrayList<Aluno>();
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Aluno a = new AlunoEnsinoMedio("micael",  LocalDate.parse("2002-01-05"), 2);
+		Aluno b = new AlunoEnsinoMedio("aicael",  LocalDate.parse("2002-01-05"), 1);
+		
+		long idade = c.getIdade();
+	}
+
+}

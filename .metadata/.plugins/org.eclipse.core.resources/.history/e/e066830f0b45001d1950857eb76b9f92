@@ -1,0 +1,12 @@
+import java.time.LocalDate;
+
+public class Apresentacao {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Aluno c = new Aluno("micael",  LocalDate.parse("2002-01-05"));
+		
+		long idade = c.getIdade();
+	}
+
+}
