@@ -28,7 +28,7 @@ public class AlunoEnsinoMedio extends Aluno {
 
 
 	public void setAno(int ano) {
-		if(this.ano < 1 || this.ano >3) {
+		if(ano < 1 || ano >3) {
 			throw new IllegalArgumentException("O ano do ensino médio está incorreto");
 		}else
 		this.ano = ano;

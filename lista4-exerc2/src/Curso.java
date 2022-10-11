@@ -1,22 +1,22 @@
 import java.util.ArrayList;
 
 public class Curso {
-	private char sigla;
+	private String sigla;
 	private String nome;
 	private ArrayList<AlunoUniversitario> alunos = new ArrayList<AlunoUniversitario>();
 	
 	public Curso() {};
 	
-	public Curso(char sigla, String nome) {
-		this.sigla = sigla;
-		this.nome = nome;
+	public Curso(String sigla, String nome) {
+		this.setSigla(sigla);
+		this.setNome(nome);
 	}
 	
-	public char getSigla() {
+	public String getSigla() {
 		return sigla;
 	}
 	
-	public void setSigla(char sigla) {
+	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
 	

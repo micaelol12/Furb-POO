@@ -18,15 +18,16 @@ public abstract class Aluno {
 	}
 	
 	public void setNome(String nome) {
+		System.out.printf(nome);
 		if(nome.length() > 4) {
 			this.nome = nome;
-		}  throw new IllegalArgumentException("O nome deve ter ao menos 5 letras");
+		}else  throw new IllegalArgumentException("O nome deve ter ao menos 5 letras");
 	}
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 	public void setDataNascimento(LocalDate dataNascimento) {
-		if(this.dataNascimento.isAfter(LocalDate.now())) {
+		if(dataNascimento.isAfter(LocalDate.now())) {
 			 throw new IllegalArgumentException("Data de nascimento inválida");
 		}else  this.dataNascimento = dataNascimento;
 		

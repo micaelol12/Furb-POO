@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -10,8 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class Apresentacao {
 
@@ -19,6 +24,9 @@ public class Apresentacao {
 	private JTextField textField;
 	private JTextField textField_1;
 	private ArrayList<Curso> cursos = new ArrayList<Curso>();
+	private JTextField AlunoNome;
+	private JTextField AlunoNasci;
+	private JTextField AlunoAno;
 	/**
 	 * Launch the application.
 	 */
@@ -79,19 +87,116 @@ public class Apresentacao {
 		btnNewButton.setBounds(10, 105, 111, 23);
 		panel.add(btnNewButton);
 		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Aluno", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		AlunoNome = new JTextField();
+		AlunoNome.setBounds(10, 27, 169, 20);
+		panel_1.add(AlunoNome);
+		AlunoNome.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Nome");
+		lblNewLabel_2.setBounds(10, 11, 46, 14);
+		panel_1.add(lblNewLabel_2);
+		
+		AlunoNasci = new JTextField();
+		AlunoNasci.setBounds(189, 27, 117, 20);
+		panel_1.add(AlunoNasci);
+		AlunoNasci.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Data de nascimento");
+		lblNewLabel_3.setBounds(189, 11, 117, 14);
+		panel_1.add(lblNewLabel_3);
+		
+	    ButtonGroup group = new ButtonGroup();
+	    
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ensino M\u00E9dio");
+		rdbtnNewRadioButton.setBounds(10, 76, 109, 23);
+		panel_1.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setActionCommand("EM");
+		
+		JLabel lblNewLabel_4 = new JLabel("Tipo de aluno");
+		lblNewLabel_4.setBounds(10, 58, 94, 14);
+		panel_1.add(lblNewLabel_4);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Universit\u00E1rio");
+		rdbtnNewRadioButton_1.setBounds(120, 76, 109, 23);
+		panel_1.add(rdbtnNewRadioButton_1);
+		rdbtnNewRadioButton_1.setActionCommand("U");
+			
+		group.add(rdbtnNewRadioButton);
+		group.add(rdbtnNewRadioButton_1);
+		
+		AlunoAno = new JTextField();
+		AlunoAno.setBounds(10, 123, 86, 20);
+		panel_1.add(AlunoAno);
+		AlunoAno.setColumns(10);
+		
+		JLabel lblNewLabel_5 = new JLabel("Ano");
+		lblNewLabel_5.setBounds(10, 106, 46, 14);
+		panel_1.add(lblNewLabel_5);
+		
+		JButton btnNewButton_1 = new JButton("Cadastrar");
+		btnNewButton_1.setBounds(330, 199, 89, 23);
+		panel_1.add(btnNewButton_1);
+		
+		String[] formasDeIngresso = { "Vestibular", "Enem", "Seletivo especial", "Transferência externa", "Transferência Interna" };
+		JComboBox comboBox = new JComboBox(formasDeIngresso);
+		comboBox.setBounds(120, 122, 94, 22);
+		panel_1.add(comboBox);
+		
+		JLabel lblNewLabel_6 = new JLabel("Forma de ingresso");
+		lblNewLabel_6.setBounds(120, 106, 94, 14);
+		panel_1.add(lblNewLabel_6);
+		
+		JComboBox comboBox_1 = new JComboBox(this.cursos.toArray());
+		comboBox_1.setBounds(242, 122, 94, 23);
+		panel_1.add(comboBox_1);
+		
+		JLabel lblNewLabel_7 = new JLabel("Cursos");
+		lblNewLabel_7.setBounds(242, 106, 46, 14);
+		panel_1.add(lblNewLabel_7);
+		
 		btnNewButton.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Curso c = new Curso(textField_1.getText().charAt(0), textField.getText());							
-						} catch(e) {
-							
+							Curso c = new Curso(textField_1.getText(), textField.getText());
+							cursos.add(c);
+							JOptionPane.showMessageDialog(frame, cursos.toArray());
+							comboBox_1.setModel(new DefaultComboBoxModel(getModel()));
+						} catch(IllegalArgumentException illegal_ex) {
+							JOptionPane.showMessageDialog(frame, illegal_ex.getMessage());
 						}
 						
 					}
 				});
 		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
+
+		btnNewButton_1.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							if(group.getSelection().getActionCommand() == "EM") {
+								AlunoEnsinoMedio a = new AlunoEnsinoMedio(AlunoNome.getText(), LocalDate.parse(AlunoNasci.getText()),Integer.parseInt(AlunoAno.getText()) );
+								JOptionPane.showMessageDialog(frame, "aluno criado com sucesso");
+							}
+						} catch(IllegalArgumentException illegal_ex) {
+							JOptionPane.showMessageDialog(frame, illegal_ex.getMessage());
+						}
+						
+					}
+				});
+		
 	}
+	private String[] getModel(){
+		  String[] string = new String[cursos.size()];
+		  
+		    for (int i = 0; i < cursos.size(); i++) {
+	            string[i] = cursos.get(i).getNome();
+	        }
+	        return string;
+	}
+	
 }
