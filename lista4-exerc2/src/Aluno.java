@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract class Aluno {
+public abstract class Aluno implements Comparable<Aluno> {
 	private String nome;
 	private LocalDate dataNascimento;
 	
@@ -17,6 +17,13 @@ public abstract class Aluno {
 		return nome;
 	}
 	
+	
+	@Override
+	public int compareTo(Aluno o) {	
+		// TODO Auto-generated method stub
+		return this.nome.compareTo(o.getNome());
+	}
+
 	public void setNome(String nome) {
 		System.out.printf(nome);
 		if(nome.length() > 4) {
